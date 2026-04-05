@@ -3,7 +3,7 @@ import type {
   ISignInRequest,
   ISignUpRequest,
 } from "./dto/request/auth.request";
-import type { IAuthResponse } from "./dto/response/auth.response";
+import type { IAuthResponse } from "./dto";
 
 export const signIn = async (data: ISignInRequest): Promise<IAuthResponse> => {
   const response = await baseApi.post<IAuthResponse>("/auth/sign-in", data);
@@ -22,17 +22,23 @@ export const signUp = async (data: ISignUpRequest): Promise<IAuthResponse> => {
   formData.append("about", data.about);
   formData.append("phone", data.phone);
 
-  const response = await baseApi.post<IAuthResponse>("/auth/sign-up", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const response = await baseApi.post<IAuthResponse>(
+    "/auth/sign-up",
+    formData,
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+    },
+  );
 
   return response.data;
 };
 
 export const refreshToken = async (token: string): Promise<IAuthResponse> => {
-  const response = await baseApi.post<IAuthResponse>("/auth/refresh-token", {
-    refreshToken: token,
-  });
+  const response = await baseApi.post<IAuthResponse>(
+    "/auth/refresh-token",
+    null,
+    { headers: { Authorization: `bearer ${token}` } },
+  );
 
   return response.data;
 };

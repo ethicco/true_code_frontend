@@ -1,0 +1,88 @@
+.wrapper {
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header .headerTitle {
+  color: #ffffff;
+  margin: 0;
+}
+
+.footer {
+  text-align: center;
+  border-top: 1px solid #001529;
+}
+
+.sider {
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #ffffff;
+  padding: 16px 32px;
+
+  :global {
+    *,
+    .ant-typography,
+    .ant-descriptions-item-label,
+    .ant-descriptions-item-content {
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    .ant-typography[class*="danger"] {
+      color: #ff7875 !important;
+    }
+  }
+}
+
+.siderContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatarUpload {
+  cursor: pointer;
+ 
+}
+
+.avatarWrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover .avatarOverlay {
+    opacity: 1;
+  }
+}
+
+.avatar {
+  display: block;
+  border: 1px #fff solid;
+}
+
+.avatarOverlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cameraIcon {
+  font-size: 24px;
+  color: #ffffff !important;
+}
+
+.profileLabel {
+  font-size: 14px;
+}
