@@ -5,17 +5,7 @@ import type { SignUpFieldType, SignUpProps } from "./types";
 import { useSignUp } from "../../hooks";
 
 import styles from "./SignUp.module.scss";
-
-const FileInput: FC<{
-  onChange?: (file: File | undefined) => void;
-  value?: File;
-}> = ({ onChange }) => (
-  <Input
-    type="file"
-    accept="image/*"
-    onChange={(e) => onChange?.(e.target.files?.[0])}
-  />
-);
+import FileInput from "../../../../components/InputFile/InputFile";
 
 export const SignUp: FC<SignUpProps> = (props) => {
   const { handleChangeForm } = props;
