@@ -1,59 +1,57 @@
-import { useState, type FC } from "react";
-import {
-  Button,
-  Form,
-  Input,
-  Upload,
-  type UploadFile,
-  type UploadProps,
-} from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import type { FC } from "react";
+import { Alert, Button, Form, Input } from "antd";
 
 import type { SignUpFieldType, SignUpProps } from "./types";
+import { useSignUp } from "../../hooks";
 
 import styles from "./SignUp.module.scss";
 
 export const SignUp: FC<SignUpProps> = (props) => {
   const { handleChangeForm } = props;
+  const { mutate: signUp, isPending, error } = useSignUp();
 
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-
-  const handleSignUp = () => {
+  const handleSignIn = () => {
     handleChangeForm("SIGN_IN");
   };
 
-  const handleChange: UploadProps["onChange"] = (info) => {
-    let newFileList = [...info.fileList];
-
-    newFileList = newFileList.map((file) => {
-      if (file.response) {
-        file.url = file.response.url;
-      }
-      return file;
-    });
-
-    setFileList(newFileList);
+  const handleFinish = (values: SignUpFieldType) => {
+    signUp(values);
   };
 
   return (
     <Form
-      name="basic"
+      name="sign-up"
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       classNames={{ root: styles.form }}
       autoComplete="off"
+      onFinish={handleFinish}
     >
+      {error && (
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Alert
+            description="Ошибка регистрации. Проверьте данные."
+            type="error"
+            showIcon
+          />
+        </Form.Item>
+      )}
+
       <Form.Item<SignUpFieldType>
         label="Аватар"
         name="avatar"
-        rules={[{ required: true, message: "Please input your avatar!" }]}
+        rules={[{ required: true, message: "Загрузите изображение" }]}
       >
-        <Input type={"file"} />
+        <Input type="file" />
       </Form.Item>
+
       <Form.Item<SignUpFieldType>
         label="Email"
         name="email"
-        rules={[{ required: true, message: "Please input your email!" }]}
+        rules={[
+          { required: true, message: "Введите email" },
+          { type: "email", message: "Некорректный email" },
+        ]}
       >
         <Input />
       </Form.Item>
@@ -61,7 +59,7 @@ export const SignUp: FC<SignUpProps> = (props) => {
       <Form.Item<SignUpFieldType>
         label="Имя"
         name="firstName"
-        rules={[{ required: true, message: "Please input your first name!" }]}
+        rules={[{ required: true, message: "Введите имя" }]}
       >
         <Input />
       </Form.Item>
@@ -69,7 +67,7 @@ export const SignUp: FC<SignUpProps> = (props) => {
       <Form.Item<SignUpFieldType>
         label="Фамилия"
         name="lastName"
-        rules={[{ required: true, message: "Please input your last name!" }]}
+        rules={[{ required: true, message: "Введите фамилию" }]}
       >
         <Input />
       </Form.Item>
@@ -77,7 +75,7 @@ export const SignUp: FC<SignUpProps> = (props) => {
       <Form.Item<SignUpFieldType>
         label="Пароль"
         name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
+        rules={[{ required: true, message: "Введите пароль" }]}
       >
         <Input.Password />
       </Form.Item>
@@ -86,7 +84,18 @@ export const SignUp: FC<SignUpProps> = (props) => {
         label="Подтверждение пароля"
         name="confirmPassword"
         className={styles.confirmPassword}
-        rules={[{ required: true, message: "Please confirm your password!" }]}
+        dependencies={["password"]}
+        rules={[
+          { required: true, message: "Подтвердите пароль" },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue("password") === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error("Пароли не совпадают"));
+            },
+          }),
+        ]}
       >
         <Input.Password />
       </Form.Item>
@@ -94,35 +103,35 @@ export const SignUp: FC<SignUpProps> = (props) => {
       <Form.Item<SignUpFieldType>
         label="Дата рождения"
         name="birthday"
-        rules={[{ required: true, message: "Please input your birthday!" }]}
+        rules={[{ required: true, message: "Введите дату рождения" }]}
       >
-        <Input type={"date"} />
+        <Input type="date" />
       </Form.Item>
 
       <Form.Item<SignUpFieldType>
         label="О себе"
-        name="birthday"
-        rules={[{ required: true, message: "Please input your about!" }]}
+        name="about"
+        rules={[{ required: true, message: "Расскажите о себе" }]}
       >
-        <Input type={"text"} />
+        <Input type="text" />
       </Form.Item>
 
       <Form.Item<SignUpFieldType>
-        label="Тедефон"
+        label="Телефон"
         name="phone"
-        rules={[{ required: true, message: "Please input your phone!" }]}
+        rules={[{ required: true, message: "Введите телефон" }]}
       >
-        <Input type={"tel"} />
+        <Input type="tel" />
       </Form.Item>
 
       <Form.Item label={null}>
-        <Button type="link" htmlType="button" onClick={handleSignUp}>
+        <Button type="link" htmlType="button" onClick={handleSignIn}>
           Войти
         </Button>
       </Form.Item>
 
       <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isPending}>
           Зарегестрироваться
         </Button>
       </Form.Item>
