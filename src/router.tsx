@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { pages as Main } from "./features/Main";
 import { pages as Auth } from "./features/Auth";
 import { ErrorPage } from "./features/Error/pages";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -10,7 +11,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Main.MainPage />,
+    element: (
+      <ProtectedRoute>
+        <Main.MainPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "*",
