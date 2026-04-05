@@ -5,7 +5,7 @@ export type SignUpProps = {
 };
 
 export type SignUpFieldType = {
-  avatar: string;
+  avatar: File;
   firstName: string;
   lastName: string;
   password: string;

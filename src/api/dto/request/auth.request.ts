@@ -11,5 +11,5 @@ export interface ISignUpRequest {
   birthday: string;
   about: string;
   phone: string;
-  avatar: string;
+  avatar: File;
 }

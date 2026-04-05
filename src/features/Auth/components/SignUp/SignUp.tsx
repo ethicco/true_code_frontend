@@ -6,6 +6,17 @@ import { useSignUp } from "../../hooks";
 
 import styles from "./SignUp.module.scss";
 
+const FileInput: FC<{
+  onChange?: (file: File | undefined) => void;
+  value?: File;
+}> = ({ onChange }) => (
+  <Input
+    type="file"
+    accept="image/*"
+    onChange={(e) => onChange?.(e.target.files?.[0])}
+  />
+);
+
 export const SignUp: FC<SignUpProps> = (props) => {
   const { handleChangeForm } = props;
   const { mutate: signUp, isPending, error } = useSignUp();
@@ -42,7 +53,7 @@ export const SignUp: FC<SignUpProps> = (props) => {
         name="avatar"
         rules={[{ required: true, message: "Загрузите изображение" }]}
       >
-        <Input type="file" />
+        <FileInput />
       </Form.Item>
 
       <Form.Item<SignUpFieldType>
