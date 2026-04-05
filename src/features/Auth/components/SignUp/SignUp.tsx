@@ -2,10 +2,10 @@ import type { FC } from "react";
 import { Alert, Button, Form, Input } from "antd";
 
 import type { SignUpFieldType, SignUpProps } from "./types";
-import { useSignUp } from "../../hooks";
+import { useSignUp } from "@/features/Auth/hooks";
 
 import styles from "./SignUp.module.scss";
-import FileInput from "../../../../components/InputFile/InputFile";
+import FileInput from "@/components/InputFile/InputFile";
 
 export const SignUp: FC<SignUpProps> = (props) => {
   const { handleChangeForm } = props;

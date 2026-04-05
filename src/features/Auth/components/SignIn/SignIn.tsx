@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { Alert, Button, Form, Input } from "antd";
 
 import type { SignInFieldType, SignInProps } from "./types";
-import { useSignIn } from "../../hooks";
+import { useSignIn } from "@/features/Auth/hooks";
 
 import styles from "./SignIn.module.scss";
 
@@ -29,7 +29,11 @@ export const SignIn: FC<SignInProps> = (props) => {
     >
       {error && (
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Alert description="Неверный email или пароль" type="error" showIcon />
+          <Alert
+            description="Неверный email или пароль"
+            type="error"
+            showIcon
+          />
         </Form.Item>
       )}
 
