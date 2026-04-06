@@ -34,3 +34,9 @@ export const updatePost = async (id: string, data: IUpdatePost) => {
 
   return response.data;
 };
+
+export const getPost = async (id: string): Promise<IPostResponse> => {
+  const response = await baseApi.get<IPostResponse>(`/posts/${id}`);
+
+  return response.data;
+};
