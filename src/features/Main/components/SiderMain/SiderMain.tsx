@@ -12,18 +12,21 @@ import Sider from "antd/es/layout/Sider";
 import { CameraOutlined, UserOutlined } from "@ant-design/icons";
 import { useState, type FC } from "react";
 
-import { useMe } from "@/features/Main/hooks";
+import { useMe, useAvatarUpdate } from "@/features/Main/hooks";
 import styles from "./SiderMain.module.scss";
 import config from "@/config/config";
 
 const SiderMain: FC = () => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const { data: user, isLoading, isError } = useMe();
+  const { mutate: updateAvatar } = useAvatarUpdate();
 
   const handleUploadChange = (info: UploadChangeParam) => {
     const file = info.file.originFileObj ?? (info.file as unknown as File);
 
     if (!file) return;
+
+    updateAvatar({ avatar: file });
 
     const objectUrl = URL.createObjectURL(file);
 
