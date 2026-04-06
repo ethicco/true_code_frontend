@@ -4,3 +4,9 @@ export interface IPostListRequest {
   userId?: string;
   sort?: string;
 }
+
+export interface IUpdatePost {
+  text: string;
+  images: Array<File>;
+  imagesUrls: Array<string>;
+}
