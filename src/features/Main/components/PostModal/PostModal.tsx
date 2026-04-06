@@ -3,14 +3,19 @@ import { type FC } from "react";
 
 import styles from "./PostModal.module.scss";
 import type { PostFieldType, PostModalProps } from "./types";
-import { usePostById, useCreatePost } from "@/features/Main/hooks";
+import {
+  usePostById,
+  useCreatePost,
+  useUpdatePost,
+} from "@/features/Main/hooks";
 import { PostForm } from "../PostForm";
 
 const PostModal: FC<PostModalProps> = (props) => {
   const { id, isOpen, setOpen } = props;
 
-  const { data, isLoading } = usePostById(id as string);
+  const { data, isLoading } = usePostById(id!);
   const { mutate: createPost } = useCreatePost();
+  const { mutate: updatePost } = useUpdatePost(id!);
 
   const onCancel = () => {
     setOpen(false);
@@ -19,6 +24,8 @@ const PostModal: FC<PostModalProps> = (props) => {
   const handleFinish = (payload: PostFieldType) => {
     if (!id) {
       createPost(payload, { onSuccess: () => setOpen(false) });
+    } else {
+      updatePost(payload, { onSuccess: () => setOpen(false) });
     }
   };
 
