@@ -10,7 +10,7 @@ import PostModal from "../PostModal/PostModal";
 
 const ContentMain: FC = () => {
   const [sort, setSort] = useState("createdAt:desc");
-  const [userId, setUserId] = useState<null | string>(null);
+  const [postId, setPostId] = useState<null | string>(null);
   const [isOpen, setOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const { data, isFetchingNextPage, hasNextPage, fetchNextPage } =
@@ -18,8 +18,17 @@ const ContentMain: FC = () => {
 
   const posts = useMemo(() => data?.pages.flatMap((p) => p.data) ?? [], [data]);
 
-  const openModal = () => {
+  const openModal = (id?: string) => {
     setOpen(true);
+
+    if (id) {
+      setPostId(id);
+    }
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+    setPostId(null);
   };
 
   useEffect(() => {
@@ -53,7 +62,7 @@ const ContentMain: FC = () => {
           ]}
           style={{ width: 180 }}
         />
-        <Button type="primary" htmlType="button" onClick={openModal}>
+        <Button type="primary" htmlType="button" onClick={() => openModal()}>
           Создать пост
         </Button>
       </Flex>
@@ -63,7 +72,7 @@ const ContentMain: FC = () => {
         dataSource={posts}
         renderItem={(post) => (
           <List.Item key={post.id} style={{ padding: 0, border: "none" }}>
-            <Post post={post} />
+            <Post post={post} setOpen={openModal} />
           </List.Item>
         )}
       />
@@ -75,7 +84,7 @@ const ContentMain: FC = () => {
           <Spin size="large" />
         </Flex>
       )}
-      <PostModal isOpen={isOpen} setOpen={setOpen} id={userId} />
+      <PostModal isOpen={isOpen} setOpen={closeModal} id={postId} />
     </Content>
   );
 };

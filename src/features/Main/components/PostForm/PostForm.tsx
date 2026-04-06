@@ -2,6 +2,7 @@ import { useState, type FC } from "react";
 import { Button, Flex, Form, Input, Upload, type UploadFile } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
+import settings from "@/config/config";
 import type { PostFormProps } from "./types";
 import type { PostFieldType } from "../PostModal/types";
 
@@ -20,7 +21,7 @@ const PostForm: FC<PostFormProps> = (props) => {
       uid: String(index),
       name: `image-${index}`,
       status: "done" as const,
-      url,
+      url: `${settings.STATIC_URL}/${url}`,
     }));
   });
 

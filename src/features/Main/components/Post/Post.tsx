@@ -1,19 +1,21 @@
 import { type FC } from "react";
 import { Button, Card, Flex, Image, Typography } from "antd";
 
-import { type IPostResponse } from "@/api/dto/response/posts.response";
 import { formatDate } from "@/features/Main/utils";
 import settings from "@/config/config";
 
 import styles from "./Post.module.scss";
 import { useMe } from "../../hooks";
+import type { PostProps } from "./types";
 
-interface PostProps {
-  post: IPostResponse;
-}
+const Post: FC<PostProps> = (props) => {
+  const { post, setOpen } = props;
 
-const Post: FC<PostProps> = ({ post }) => {
   const { data: user } = useMe();
+
+  const handleEditModal = () => {
+    setOpen(post.id);
+  };
 
   return (
     <Card
@@ -21,7 +23,7 @@ const Post: FC<PostProps> = ({ post }) => {
       extra={
         post.userId === user?.id ? (
           <Flex gap={8}>
-            <Button size="small" onClick={() => {}}>
+            <Button size="small" onClick={handleEditModal}>
               Редактировать
             </Button>
             <Button size="small" danger onClick={() => {}}>
