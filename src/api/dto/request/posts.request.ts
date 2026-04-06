@@ -5,8 +5,13 @@ export interface IPostListRequest {
   sort?: string;
 }
 
-export interface IUpdatePost {
+export interface IUpdatePostRequest {
   text: string;
   images: Array<File>;
   imagesUrls: Array<string>;
+}
+
+export interface ICreatePostRequest {
+  text: string;
+  images: Array<File>;
 }

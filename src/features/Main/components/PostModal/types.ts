@@ -1,5 +1,5 @@
 export type PostModalProps = {
-  id?: string;
+  id: string | null;
   isOpen: boolean;
   setOpen: (type: boolean) => void;
 };

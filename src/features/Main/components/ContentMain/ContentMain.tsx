@@ -6,15 +6,21 @@ import { usePostList } from "@/features/Main/hooks";
 import { Post } from "@/features/Main/components/Post";
 
 import styles from "./ContentMain.module.scss";
+import PostModal from "../PostModal/PostModal";
 
 const ContentMain: FC = () => {
   const [sort, setSort] = useState("createdAt:desc");
+  const [userId, setUserId] = useState<null | string>(null);
+  const [isOpen, setOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
-
   const { data, isFetchingNextPage, hasNextPage, fetchNextPage } =
     usePostList(sort);
 
   const posts = useMemo(() => data?.pages.flatMap((p) => p.data) ?? [], [data]);
+
+  const openModal = () => {
+    setOpen(true);
+  };
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -47,7 +53,7 @@ const ContentMain: FC = () => {
           ]}
           style={{ width: 180 }}
         />
-        <Button type="primary" htmlType="button">
+        <Button type="primary" htmlType="button" onClick={openModal}>
           Создать пост
         </Button>
       </Flex>
@@ -69,6 +75,7 @@ const ContentMain: FC = () => {
           <Spin size="large" />
         </Flex>
       )}
+      <PostModal isOpen={isOpen} setOpen={setOpen} id={userId} />
     </Content>
   );
 };
