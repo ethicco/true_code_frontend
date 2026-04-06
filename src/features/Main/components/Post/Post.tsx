@@ -5,13 +5,14 @@ import { formatDate } from "@/features/Main/utils";
 import settings from "@/config/config";
 
 import styles from "./Post.module.scss";
-import { useMe } from "../../hooks";
+import { useDeletePost, useMe } from "../../hooks";
 import type { PostProps } from "./types";
 
 const Post: FC<PostProps> = (props) => {
   const { post, setOpen } = props;
 
   const { data: user } = useMe();
+  const { mutate: onDeletePost } = useDeletePost(post.id);
 
   const handleEditModal = () => {
     setOpen(post.id);
@@ -26,7 +27,7 @@ const Post: FC<PostProps> = (props) => {
             <Button size="small" onClick={handleEditModal}>
               Редактировать
             </Button>
-            <Button size="small" danger onClick={() => {}}>
+            <Button size="small" danger onClick={() => onDeletePost()}>
               Удалить
             </Button>
           </Flex>
