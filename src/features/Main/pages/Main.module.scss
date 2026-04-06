@@ -30,11 +30,11 @@
     .ant-typography,
     .ant-descriptions-item-label,
     .ant-descriptions-item-content {
-      color: rgba(255, 255, 255, 0.85) !important;
+      color: rgba(255, 255, 255, 0.85);
     }
 
     .ant-typography[class*="danger"] {
-      color: #ff7875 !important;
+      color: #ff7875;
     }
   }
 }
@@ -80,7 +80,7 @@
 
 .cameraIcon {
   font-size: 24px;
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
 .profileLabel {
