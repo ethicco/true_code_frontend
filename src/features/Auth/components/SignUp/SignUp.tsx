@@ -3,9 +3,9 @@ import { Alert, Button, Form, Input } from "antd";
 
 import type { SignUpFieldType, SignUpProps } from "./types";
 import { useSignUp } from "@/features/Auth/hooks";
+import { InputFile } from "@/components/InputFile";
 
 import styles from "./SignUp.module.scss";
-import FileInput from "@/components/InputFile/InputFile";
 
 export const SignUp: FC<SignUpProps> = (props) => {
   const { handleChangeForm } = props;
@@ -43,7 +43,7 @@ export const SignUp: FC<SignUpProps> = (props) => {
         name="avatar"
         rules={[{ required: true, message: "Загрузите изображение" }]}
       >
-        <FileInput />
+        <InputFile />
       </Form.Item>
 
       <Form.Item<SignUpFieldType>

@@ -1,7 +1,6 @@
-import { Modal, Typography } from "antd";
 import { type FC } from "react";
+import { Modal, Typography } from "antd";
 
-import styles from "./PostModal.module.scss";
 import type { PostFieldType, PostModalProps } from "./types";
 import {
   usePostById,
@@ -9,6 +8,8 @@ import {
   useUpdatePost,
 } from "@/features/Main/hooks";
 import { PostForm } from "../PostForm";
+
+import styles from "./PostModal.module.scss";
 
 const PostModal: FC<PostModalProps> = (props) => {
   const { id, isOpen, setOpen } = props;

@@ -1,10 +1,9 @@
 import { useState, type FC } from "react";
 import { Layout } from "antd";
+import { Content } from "antd/es/layout/layout";
 
 import type { AuthFormState } from "./types";
 import { SignIn, SignUp } from "../components";
-
-import { Content } from "antd/es/layout/layout";
 
 import styles from "./Auth.module.scss";
 

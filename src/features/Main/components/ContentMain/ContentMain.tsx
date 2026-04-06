@@ -4,9 +4,9 @@ import { Button, Flex, List, Select, Spin } from "antd";
 
 import { usePostList } from "@/features/Main/hooks";
 import { Post } from "@/features/Main/components/Post";
+import PostModal from "../PostModal/PostModal";
 
 import styles from "./ContentMain.module.scss";
-import PostModal from "../PostModal/PostModal";
 
 const ContentMain: FC = () => {
   const [sort, setSort] = useState("createdAt:desc");

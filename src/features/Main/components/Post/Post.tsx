@@ -2,11 +2,11 @@ import { type FC } from "react";
 import { Button, Card, Flex, Image, Typography } from "antd";
 
 import { formatDate } from "@/features/Main/utils";
-import settings from "@/config/config";
+import configs from "@/config/config";
+import { useDeletePost, useMe } from "@/features/Main/hooks";
+import type { PostProps } from "./types";
 
 import styles from "./Post.module.scss";
-import { useDeletePost, useMe } from "../../hooks";
-import type { PostProps } from "./types";
 
 const Post: FC<PostProps> = (props) => {
   const { post, setOpen } = props;
@@ -46,7 +46,7 @@ const Post: FC<PostProps> = (props) => {
             {post.images.map((src, i) => (
               <Image
                 key={i}
-                src={`${settings.STATIC_URL}/${src}`}
+                src={`${configs.STATIC_URL}/${src}`}
                 width={120}
                 height={120}
                 style={{ objectFit: "cover", borderRadius: 4 }}

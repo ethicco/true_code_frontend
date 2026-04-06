@@ -13,9 +13,10 @@ import { CameraOutlined, UserOutlined } from "@ant-design/icons";
 import { useState, type FC } from "react";
 
 import { useMe, useAvatarUpdate } from "@/features/Main/hooks";
-import styles from "./SiderMain.module.scss";
 import config from "@/config/config";
 import ProfileModal from "../ProfileModal/ProfileModal";
+
+import styles from "./SiderMain.module.scss";
 
 const SiderMain: FC = () => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);

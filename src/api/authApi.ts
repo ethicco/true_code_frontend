@@ -1,9 +1,5 @@
 import baseApi from "./baseApi";
-import type {
-  ISignInRequest,
-  ISignUpRequest,
-} from "./dto/request/auth.request";
-import type { IAuthResponse } from "./dto";
+import type { ISignInRequest, ISignUpRequest, IAuthResponse } from "./dto";
 
 export const signIn = async (data: ISignInRequest): Promise<IAuthResponse> => {
   const response = await baseApi.post<IAuthResponse>("/auth/sign-in", data);

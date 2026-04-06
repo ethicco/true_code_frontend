@@ -1,7 +1,7 @@
 import { Alert, Button, Flex, Form, Input, Modal, Typography } from "antd";
 import type { FC } from "react";
-import type { ProfileModalProps, UserProfileFieldType } from "./types";
 
+import type { ProfileModalProps, UserProfileFieldType } from "./types";
 import { useMe, useUpdateProfile } from "@/features/Main/hooks";
 
 import styles from "./ProfileModal.module.scss";
