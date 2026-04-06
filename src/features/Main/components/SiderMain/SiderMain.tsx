@@ -15,9 +15,12 @@ import { useState, type FC } from "react";
 import { useMe, useAvatarUpdate } from "@/features/Main/hooks";
 import styles from "./SiderMain.module.scss";
 import config from "@/config/config";
+import ProfileModal from "../ProfileModal/ProfileModal";
 
 const SiderMain: FC = () => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [isOpen, setOpen] = useState<boolean>(false);
+
   const { data: user, isLoading, isError } = useMe();
   const { mutate: updateAvatar } = useAvatarUpdate();
 
@@ -120,9 +123,14 @@ const SiderMain: FC = () => {
           </>
         )}
       </div>
-      <Button className={styles.button} htmlType="button">
+      <Button
+        className={styles.button}
+        htmlType="button"
+        onClick={() => setOpen(true)}
+      >
         Редактировать профиль
       </Button>
+      <ProfileModal isOpen={isOpen} setOpen={setOpen} />
     </Sider>
   );
 };

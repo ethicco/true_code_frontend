@@ -1,3 +1,13 @@
+.header {
+  :global(.ant-modal-header) {
+    margin-bottom: 32px;
+  }
+  :global(.ant-modal-body) {
+    display: flex;
+    justify-content: center;
+  }
+} 
+
 .form {
   width: 100%;
   max-width: 400px;

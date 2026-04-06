@@ -1,8 +1,8 @@
-import { Alert, Button, Form, Input, Modal, Typography } from "antd";
+import { Alert, Button, Flex, Form, Input, Modal, Typography } from "antd";
 import type { FC } from "react";
 import type { ProfileModalProps, UserProfileFieldType } from "./types";
 
-import { useMe } from "@/features/Main/hooks";
+import { useMe, useUpdateProfile } from "@/features/Main/hooks";
 
 import styles from "./ProfileModal.module.scss";
 
@@ -10,19 +10,25 @@ const ProfileModal: FC<ProfileModalProps> = (props) => {
   const { isOpen, setOpen } = props;
 
   const { data: user, isLoading, error } = useMe();
+  const { mutate: updateProfile, isPending } = useUpdateProfile();
 
   const onCancel = () => {
     setOpen(false);
   };
 
-  const handleFinish = (values: UserProfileFieldType) => {};
+  const handleFinish = (values: UserProfileFieldType) => {
+    updateProfile(values);
+  };
 
   return (
     <Modal
+      className={styles.header}
       title={
-        <Typography.Text>Редактирование профиля пользователя</Typography.Text>
+        <Typography.Text className={styles.header}>
+          Редактирование профиля пользователя
+        </Typography.Text>
       }
-      footer={<Button type="primary">Обновить</Button>}
+      footer={null}
       open={isOpen}
       loading={isLoading}
       onCancel={onCancel}
@@ -65,6 +71,12 @@ const ProfileModal: FC<ProfileModalProps> = (props) => {
         <Form.Item<UserProfileFieldType> label="Телефон" name="phone">
           <Input type="tel" />
         </Form.Item>
+
+        <Flex justify={"flex-end"}>
+          <Button type="primary" htmlType="submit" loading={isPending}>
+            Обновить
+          </Button>
+        </Flex>
       </Form>
     </Modal>
   );
