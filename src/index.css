@@ -20,3 +20,13 @@ body {
 #root {
   min-height: 100vh;
 }
+
+@media (max-width: 720px) {
+  .ant-layout-header {
+    padding: 0 16px !important;
+  }
+
+  .ant-modal {
+    max-width: calc(100vw - 32px) !important;
+  }
+}

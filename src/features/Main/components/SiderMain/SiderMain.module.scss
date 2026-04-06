@@ -68,3 +68,10 @@
 .button {
   margin-top: 32px;
 }
+
+@media (max-width: 720px) {
+  .sider {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
