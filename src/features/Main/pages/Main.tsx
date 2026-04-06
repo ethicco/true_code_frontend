@@ -1,9 +1,10 @@
+import type { FC } from "react";
 import { Layout, Typography } from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
-import { type FC } from "react";
+import { Footer, Header } from "antd/es/layout/layout";
+
+import { ContentMain, SiderMain } from "../components";
 
 import styles from "./Main.module.scss";
-import { SiderMain } from "../components";
 
 const MainPage: FC = () => {
   return (
@@ -15,7 +16,7 @@ const MainPage: FC = () => {
       </Header>
       <Layout>
         <SiderMain />
-        <Content>Content</Content>
+        <ContentMain />
       </Layout>
       <Footer className={styles.footer}>
         <Typography.Text>
