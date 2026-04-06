@@ -67,23 +67,25 @@ const ContentMain: FC = () => {
         </Button>
       </Flex>
 
-      <List
-        className={styles.list}
-        dataSource={posts}
-        renderItem={(post) => (
-          <List.Item key={post.id} style={{ padding: 0, border: "none" }}>
-            <Post post={post} setOpen={openModal} />
-          </List.Item>
+      <div className={styles.listWrapper}>
+        <List
+          className={styles.list}
+          dataSource={posts}
+          renderItem={(post) => (
+            <List.Item key={post.id} style={{ padding: 0, border: "none" }}>
+              <Post post={post} setOpen={openModal} />
+            </List.Item>
+          )}
+        />
+
+        <div ref={sentinelRef} />
+
+        {isFetchingNextPage && (
+          <Flex justify="center" className={styles.spinner}>
+            <Spin size="large" />
+          </Flex>
         )}
-      />
-
-      <div ref={sentinelRef} />
-
-      {isFetchingNextPage && (
-        <Flex justify="center" className={styles.spinner}>
-          <Spin size="large" />
-        </Flex>
-      )}
+      </div>
       <PostModal isOpen={isOpen} setOpen={closeModal} id={postId} />
     </Content>
   );

@@ -14,7 +14,7 @@ const MainPage: FC = () => {
           Приложение
         </Typography.Title>
       </Header>
-      <Layout>
+      <Layout className={styles.innerLayout}>
         <SiderMain />
         <ContentMain />
       </Layout>

@@ -1,18 +1,24 @@
 .content {
   padding: 32px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
-
 
 .header {
   border-bottom: 1px solid #002140;
   padding-bottom: 16px;
+  flex-shrink: 0;
 }
 
-.list {
+.listWrapper {
+  flex: 1;
+  overflow-y: auto;
   margin-top: 16px;
 }
 
 .spinner {
   padding: 24px;
+  flex-shrink: 0;
 }
 
