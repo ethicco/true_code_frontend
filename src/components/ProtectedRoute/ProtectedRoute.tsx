@@ -1,15 +1,15 @@
 import type { FC, ReactNode } from "react";
 import { Navigate } from "react-router";
-import { getCookie } from "../../api/cookies";
+import { useMe } from "@/features/Main/hooks";
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
-  const token = getCookie("accessToken");
+  const { data, isLoading } = useMe();
 
-  if (!token) {
+  if (!data && !isLoading) {
     return <Navigate to="/auth" replace />;
   }
 

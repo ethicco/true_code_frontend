@@ -30,7 +30,8 @@
       "@/components/*": ["src/components/*"],
       "@/config/*": ["src/config/*"],
       "@/features/*": ["src/features/*"],
-      "@/hooks/*": ["src/hooks/*"]
+      "@/hooks/*": ["src/hooks/*"],
+      "@/interceptors/*": ["src/interceptors/*"]
     }
   },
   "include": ["src"]

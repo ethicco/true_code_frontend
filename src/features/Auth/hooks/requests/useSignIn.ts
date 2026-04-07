@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { signIn } from "../../../../api/authApi";
-import { setCookie } from "../../../../api/cookies";
 import type { ISignInRequest } from "../../../../api/dto/request/auth.request";
 
 export const useSignIn = () => {
@@ -9,9 +8,7 @@ export const useSignIn = () => {
 
   return useMutation({
     mutationFn: (data: ISignInRequest) => signIn(data),
-    onSuccess: (response) => {
-      setCookie("accessToken", response.accessToken);
-      setCookie("refreshToken", response.refreshToken);
+    onSuccess: () => {
       navigate("/");
     },
   });

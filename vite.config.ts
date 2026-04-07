@@ -13,6 +13,7 @@ export default defineConfig({
       "@/config": path.resolve(__dirname, "src/config"),
       "@/features": path.resolve(__dirname, "src/features"),
       "@/hooks": path.resolve(__dirname, "src/hooks"),
+      "@/interceptors": path.resolve(__dirname, "src/interceptors"),
     },
   },
   css: {

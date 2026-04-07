@@ -29,12 +29,8 @@ export const signUp = async (data: ISignUpRequest): Promise<IAuthResponse> => {
   return response.data;
 };
 
-export const refreshToken = async (token: string): Promise<IAuthResponse> => {
-  const response = await baseApi.post<IAuthResponse>(
-    "/auth/refresh-token",
-    null,
-    { headers: { Authorization: `bearer ${token}` } },
-  );
+export const refreshToken = async (): Promise<IAuthResponse> => {
+  const response = await baseApi.post<IAuthResponse>("/auth/refresh-token");
 
   return response.data;
 };
