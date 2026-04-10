@@ -7,9 +7,13 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
-  const { data, isLoading } = useMe();
+  const { data, isLoading, isError } = useMe();
 
-  if (!data && !isLoading) {
+  if (isLoading) {
+    return null;
+  }
+
+  if (isError || !data) {
     return <Navigate to="/auth" replace />;
   }
 
